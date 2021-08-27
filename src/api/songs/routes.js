@@ -1,8 +1,15 @@
+const { SongPayloadSchema } = require('../../validator/songs/schema');
+
 const routes = (handler) => [
   {
     method: 'POST',
     path: '/songs',
     handler: handler.postSongHandler,
+    options: {
+      validate: {
+        payload: SongPayloadSchema,
+      },
+    },
   },
   {
     method: 'GET',
@@ -18,6 +25,11 @@ const routes = (handler) => [
     method: 'PUT',
     path: '/songs/{id}',
     handler: handler.putSongByIdHandler,
+    options: {
+      validate: {
+        payload: SongPayloadSchema,
+      },
+    },
   },
   {
     method: 'DELETE',

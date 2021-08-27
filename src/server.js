@@ -1,9 +1,9 @@
 require('dotenv').config();
 
+const Boom = require('@hapi/boom');
 const Hapi = require('@hapi/hapi');
 const songs = require('./api/songs');
 const SongsService = require('./services/postgres/SongsService');
-const SongsValidator = require('./validator/songs');
 
 const init = async () => {
   const songsService = new SongsService();
@@ -17,11 +17,20 @@ const init = async () => {
     },
   });
 
+  server.ext('onPreResponse', (request) => {
+    const { response } = request;
+
+    if (Boom.isBoom(response)) {
+      response.output.payload.status = 'fail';
+    }
+
+    return response.continue || response;
+  });
+
   await server.register({
     plugin: songs,
     options: {
       service: songsService,
-      validator: SongsValidator,
     },
   });
 
