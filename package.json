@@ -7,7 +7,8 @@
     "start": "NODE_ENV=production node ./src/server.js",
     "dev": "nodemon ./src/server.js",
     "lint": "eslint ./src",
-    "migrate": "node-pg-migrate"
+    "migrate": "node-pg-migrate",
+    "key": "node -e \"console.log(require('crypto').randomBytes(64).toString('hex'));\""
   },
   "keywords": [],
   "author": "Dian Hanifudin Subhi<dhanifudin@gmail.com>",
