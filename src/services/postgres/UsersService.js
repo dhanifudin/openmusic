@@ -35,7 +35,7 @@ class UsersService {
 
     const result = await this.pool.query(query);
 
-    if (result.rowCount > 0) {
+    if (result.rowCount) {
       throw Boom.badRequest('Gagal menambahkan user. Username sudah digunakan.');
     }
   }
