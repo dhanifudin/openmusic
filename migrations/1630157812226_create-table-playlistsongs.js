@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
 
-exports.shorthands = undefined;
-
 exports.up = (pgm) => {
   pgm.createTable('playlistsongs', {
     id: {
@@ -17,17 +15,13 @@ exports.up = (pgm) => {
       notNull: true,
     },
   });
-  pgm.addConstraint(
-    'playlistsongs',
-    'fk_playlistsongs.playlist_id_playlists.id',
-    {
-      foreignKeys: {
-        columns: 'playlist_id',
-        references: 'playlists',
-        onDelete: 'CASCADE',
-      },
+  pgm.addConstraint('playlistsongs', 'fk_playlistsongs.playlist_id_playlists.id', {
+    foreignKeys: {
+      columns: 'playlist_id',
+      references: 'playlists',
+      onDelete: 'CASCADE',
     },
-  );
+  });
   pgm.addConstraint('playlistsongs', 'fk_playlistsongs.song_id_songs.id', {
     foreignKeys: {
       columns: 'song_id',
