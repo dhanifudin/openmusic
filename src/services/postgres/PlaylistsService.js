@@ -4,9 +4,10 @@ const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 
 class PlaylistsService {
-  constructor(collaborationService) {
+  constructor(collaborationService, cacheService) {
     this.pool = new Pool();
     this.collaborationService = collaborationService;
+    this.cacheService = cacheService;
   }
 
   async addPlaylist(name, owner) {
@@ -49,22 +50,33 @@ class PlaylistsService {
     if (!result.rowCount) {
       throw Boom.badRequest('Lagu gagal ditambahkan');
     }
+    await this.cacheService.delete(`playlistsongs:${playlistId}`);
     return result.rows[0].id;
   }
 
   async getPlaylistSongs(id, userId) {
     await this.verifyPlaylistAccess(id, userId);
-    const query = {
-      text: `SELECT s.id, s.title, s.performer FROM playlistsongs ps
-      INNER JOIN playlists p ON p.id = ps.playlist_id
-      LEFT JOIN collaborations c ON c.playlist_id = p.id
-      INNER JOIN songs s ON s.id = ps.song_id
-      WHERE p.id = $1 AND (p.owner = $2 OR c.user_id = $2)`,
-      values: [id, userId],
-    };
+    try {
+      const result = await this.cacheService.get(`playlistsongs:${id}`);
+      return JSON.parse(result);
+    } catch (error) {
+      const query = {
+        text: `SELECT s.id, s.title, s.performer FROM playlistsongs ps
+        INNER JOIN playlists p ON p.id = ps.playlist_id
+        LEFT JOIN collaborations c ON c.playlist_id = p.id
+        INNER JOIN songs s ON s.id = ps.song_id
+        WHERE p.id = $1 AND (p.owner = $2 OR c.user_id = $2)`,
+        values: [id, userId],
+      };
 
-    const result = await this.pool.query(query);
-    return result.rows;
+      const result = await this.pool.query(query);
+
+      await this.cacheService.set(
+        `playlistsongs:${id}`,
+        JSON.stringify(result.rows)
+      );
+      return result.rows;
+    }
   }
 
   async deletePlaylist(playlistId, userId) {
@@ -77,6 +89,7 @@ class PlaylistsService {
     if (!result.rowCount) {
       throw Boom.forbidden('Playlist gagal dihapus');
     }
+    await this.cacheService.delete(`playlistsongs:${playlistId}`);
   }
 
   async deletePlaylistSong(playlistId, userId, songId) {

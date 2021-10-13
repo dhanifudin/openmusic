@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node ./src/server.js",
-    "dev": "nodemon ./src/server.js",
+    "serve": "nodemon ./src/server.js",
     "lint": "eslint ./src",
     "migrate": "node-pg-migrate",
     "key": "node -e \"console.log(require('crypto').randomBytes(64).toString('hex'));\""
@@ -22,12 +22,16 @@
   "dependencies": {
     "@hapi/boom": "^9.1.4",
     "@hapi/hapi": "^20.1.5",
+    "@hapi/inert": "^6.0.4",
     "@hapi/jwt": "^2.1.0",
+    "amqplib": "^0.8.0",
+    "aws-sdk": "^2.991.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "joi": "^17.4.2",
     "nanoid": "^3.1.25",
     "node-pg-migrate": "^5.10.0",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "redis": "^3.1.2"
   }
 }
