@@ -1,5 +1,5 @@
-const AuthenticationsHandler = require('./handler');
-const routes = require('./routes');
+const AuthenticationsHandler = require('./handler')
+const routes = require('./routes')
 
 module.exports = {
   name: 'authentications',
@@ -7,13 +7,13 @@ module.exports = {
   register: async (server, {
     authenticationsService,
     usersService,
-    tokenManager,
+    tokenManager
   }) => {
     const authenticationsHandler = new AuthenticationsHandler(
       authenticationsService,
       usersService,
-      tokenManager,
-    );
-    server.route(routes(authenticationsHandler));
-  },
-};
+      tokenManager
+    )
+    server.route(routes(authenticationsHandler))
+  }
+}

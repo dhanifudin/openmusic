@@ -1,4 +1,4 @@
-const ExportPlaylistPayloadSchema = require('../../validator/exports/schema');
+const ExportPlaylistPayloadSchema = require('../../validator/exports/schema')
 const routes = (handler) => [
   {
     method: 'POST',
@@ -7,10 +7,10 @@ const routes = (handler) => [
     options: {
       auth: 'openmusic.jwt',
       validate: {
-        payload: ExportPlaylistPayloadSchema,
-      },
-    },
-  },
-];
+        payload: ExportPlaylistPayloadSchema
+      }
+    }
+  }
+]
 
-module.exports = routes;
+module.exports = routes

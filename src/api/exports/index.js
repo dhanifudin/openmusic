@@ -1,5 +1,5 @@
-const ExportsHandler = require('./handler');
-const routes = require('./routes');
+const ExportsHandler = require('./handler')
+const routes = require('./routes')
 
 module.exports = {
   name: 'exports',
@@ -8,7 +8,7 @@ module.exports = {
     const exportsHandler = new ExportsHandler(
       playlistsService,
       producerService
-    );
-    server.route(routes(exportsHandler));
-  },
-};
+    )
+    server.route(routes(exportsHandler))
+  }
+}
