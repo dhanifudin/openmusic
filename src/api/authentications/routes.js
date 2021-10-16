@@ -1,8 +1,8 @@
 const {
   PostAuthenticationPayloadSchema,
   PutAuthenticationPayloadSchema,
-  DeleteAuthenticationPayloadSchema,
-} = require('../../validator/authentications/schema');
+  DeleteAuthenticationPayloadSchema
+} = require('../../validator/authentications/schema')
 
 const routes = (handler) => [
   {
@@ -11,9 +11,9 @@ const routes = (handler) => [
     handler: handler.postAuthenticationHandler,
     options: {
       validate: {
-        payload: PostAuthenticationPayloadSchema,
-      },
-    },
+        payload: PostAuthenticationPayloadSchema
+      }
+    }
   },
   {
     method: 'PUT',
@@ -21,9 +21,9 @@ const routes = (handler) => [
     handler: handler.putAuthenticationHandler,
     options: {
       validate: {
-        payload: PutAuthenticationPayloadSchema,
-      },
-    },
+        payload: PutAuthenticationPayloadSchema
+      }
+    }
   },
   {
     method: 'DELETE',
@@ -31,10 +31,10 @@ const routes = (handler) => [
     handler: handler.deleteAuthenticationHandler,
     options: {
       validate: {
-        payload: DeleteAuthenticationPayloadSchema,
-      },
-    },
-  },
-];
+        payload: DeleteAuthenticationPayloadSchema
+      }
+    }
+  }
+]
 
-module.exports = routes;
+module.exports = routes

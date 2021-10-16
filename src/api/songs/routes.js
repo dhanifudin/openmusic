@@ -1,4 +1,4 @@
-const { SongPayloadSchema } = require('../../validator/songs/schema');
+const { SongPayloadSchema } = require('../../validator/songs/schema')
 
 const routes = (handler) => [
   {
@@ -7,19 +7,19 @@ const routes = (handler) => [
     handler: handler.postSongHandler,
     options: {
       validate: {
-        payload: SongPayloadSchema,
-      },
-    },
+        payload: SongPayloadSchema
+      }
+    }
   },
   {
     method: 'GET',
     path: '/songs',
-    handler: handler.getSongsHandler,
+    handler: handler.getSongsHandler
   },
   {
     method: 'GET',
     path: '/songs/{id}',
-    handler: handler.getSongByIdHandler,
+    handler: handler.getSongByIdHandler
   },
   {
     method: 'PUT',
@@ -27,15 +27,15 @@ const routes = (handler) => [
     handler: handler.putSongByIdHandler,
     options: {
       validate: {
-        payload: SongPayloadSchema,
-      },
-    },
+        payload: SongPayloadSchema
+      }
+    }
   },
   {
     method: 'DELETE',
     path: '/songs/{id}',
-    handler: handler.deleteSongByIdHandler,
-  },
-];
+    handler: handler.deleteSongByIdHandler
+  }
+]
 
-module.exports = routes;
+module.exports = routes

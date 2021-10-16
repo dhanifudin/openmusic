@@ -4,12 +4,12 @@ exports.up = (pgm) => {
   pgm.createTable('authentications', {
     token: {
       type: 'TEXT',
-      notNull: true,
-    },
-  });
-  pgm.createIndex('authentications', 'token');
-};
+      notNull: true
+    }
+  })
+  pgm.createIndex('authentications', 'token')
+}
 
 exports.down = (pgm) => {
-  pgm.dropTable('authentications');
-};
+  pgm.dropTable('authentications')
+}

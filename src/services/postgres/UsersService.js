@@ -1,81 +1,81 @@
-const Boom = require('@hapi/boom');
+const Boom = require('@hapi/boom')
 
-const bcrypt = require('bcrypt');
-const { nanoid } = require('nanoid');
-const { Pool } = require('pg');
+const bcrypt = require('bcrypt')
+const { nanoid } = require('nanoid')
+const { Pool } = require('pg')
 
 class UsersService {
-  constructor() {
-    this.pool = new Pool();
+  constructor () {
+    this.pool = new Pool()
   }
 
-  async addUser({ username, password, fullname }) {
-    await this.verifyNewUsername(username);
-    const id = `user-${nanoid(16)}`;
-    const hashedPassword = await bcrypt.hash(password, 10);
+  async addUser ({ username, password, fullname }) {
+    await this.verifyNewUsername(username)
+    const id = `user-${nanoid(16)}`
+    const hashedPassword = await bcrypt.hash(password, 10)
 
     const query = {
       text: 'INSERT INTO users VALUES($1, $2, $3, $4) RETURNING id',
-      values: [id, username, hashedPassword, fullname],
-    };
-
-    const result = await this.pool.query(query);
-    if (!result.rows[0].id) {
-      throw Boom.badRequest('User gagal ditambahkan');
+      values: [id, username, hashedPassword, fullname]
     }
 
-    return result.rows[0].id;
+    const result = await this.pool.query(query)
+    if (!result.rows[0].id) {
+      throw Boom.badRequest('User gagal ditambahkan')
+    }
+
+    return result.rows[0].id
   }
 
-  async verifyNewUsername(username) {
+  async verifyNewUsername (username) {
     const query = {
       text: 'SELECT username FROM users WHERE username = $1',
-      values: [username],
-    };
+      values: [username]
+    }
 
-    const result = await this.pool.query(query);
+    const result = await this.pool.query(query)
 
     if (result.rowCount) {
-      throw Boom.badRequest('Gagal menambahkan user. Username sudah digunakan.');
+      throw Boom.badRequest('Gagal menambahkan user. Username sudah digunakan.')
     }
   }
 
-  async verifyUserCredential(username, password) {
+  async verifyUserCredential (username, password) {
     const query = {
       text: 'SELECT id, password FROM users WHERE username = $1',
-      values: [username],
-    };
-
-    const result = await this.pool.query(query);
-
-    if (!result.rowCount) {
-      throw Boom.unauthorized('Kredensial yang Anda berikan salah');
+      values: [username]
     }
 
-    const { id, password: hashedPassword } = result.rows[0];
+    const result = await this.pool.query(query)
 
-    const match = await bcrypt.compare(password, hashedPassword);
+    if (!result.rowCount) {
+      throw Boom.unauthorized('Kredensial yang Anda berikan salah')
+    }
+
+    const { id, password: hashedPassword } = result.rows[0]
+
+    const match = await bcrypt.compare(password, hashedPassword)
 
     if (!match) {
-      throw Boom.unauthorized('Kredensial yang Anda berikan salah');
+      throw Boom.unauthorized('Kredensial yang Anda berikan salah')
     }
 
-    return id;
+    return id
   }
 
-  async getUserById(id) {
+  async getUserById (id) {
     const query = {
       text: 'SELECT id, username, fullname FROM users WHERE id = $1',
-      values: [id],
-    };
-    const result = await this.pool.query(query);
+      values: [id]
+    }
+    const result = await this.pool.query(query)
 
     if (!result.rowCount) {
-      throw Boom.notFound('User tidak ditemukan');
+      throw Boom.notFound('User tidak ditemukan')
     }
 
-    return result.rows[0];
+    return result.rows[0]
   }
 }
 
-module.exports = UsersService;
+module.exports = UsersService

@@ -4,39 +4,39 @@ exports.up = (pgm) => {
   pgm.createTable('songs', {
     id: {
       type: 'VARCHAR(50)',
-      primaryKey: true,
+      primaryKey: true
     },
     title: {
       type: 'TEXT',
-      notNull: true,
+      notNull: true
     },
     year: {
       type: 'INTEGER',
-      notNull: true,
+      notNull: true
     },
     performer: {
       type: 'TEXT',
-      notNull: true,
+      notNull: true
     },
     genre: {
       type: 'TEXT',
-      notNull: true,
+      notNull: true
     },
     duration: {
       type: 'INTEGER',
-      notNull: true,
+      notNull: true
     },
     inserted_at: {
       type: 'TEXT',
-      notNull: true,
+      notNull: true
     },
     updated_at: {
       type: 'TEXT',
-      notNull: true,
-    },
-  });
-};
+      notNull: true
+    }
+  })
+}
 
 exports.down = (pgm) => {
-  pgm.dropTable('songs');
-};
+  pgm.dropTable('songs')
+}

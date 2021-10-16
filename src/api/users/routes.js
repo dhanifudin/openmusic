@@ -1,4 +1,4 @@
-const { UserPayloadSchema } = require('../../validator/users/schema');
+const { UserPayloadSchema } = require('../../validator/users/schema')
 
 const routes = (handler) => [
   {
@@ -7,15 +7,15 @@ const routes = (handler) => [
     handler: handler.postUserHandler,
     options: {
       validate: {
-        payload: UserPayloadSchema,
-      },
-    },
+        payload: UserPayloadSchema
+      }
+    }
   },
   {
     method: 'GET',
     path: '/users/{id}',
-    handler: handler.getUserByIdHandler,
-  },
-];
+    handler: handler.getUserByIdHandler
+  }
+]
 
-module.exports = routes;
+module.exports = routes
