@@ -1,6 +1,6 @@
 const {
-  CollaborationPayloadSchema,
-} = require('../../validator/collaborations/schema');
+  CollaborationPayloadSchema
+} = require('../../validator/collaborations/schema')
 
 const routes = (handler) => [
   {
@@ -10,9 +10,9 @@ const routes = (handler) => [
     options: {
       auth: 'openmusic.jwt',
       validate: {
-        payload: CollaborationPayloadSchema,
-      },
-    },
+        payload: CollaborationPayloadSchema
+      }
+    }
   },
   {
     method: 'DELETE',
@@ -21,10 +21,10 @@ const routes = (handler) => [
     options: {
       auth: 'openmusic.jwt',
       validate: {
-        payload: CollaborationPayloadSchema,
-      },
-    },
-  },
-];
+        payload: CollaborationPayloadSchema
+      }
+    }
+  }
+]
 
-module.exports = routes;
+module.exports = routes

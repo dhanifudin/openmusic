@@ -1,7 +1,7 @@
 const {
   PlaylistPayloadSchema,
-  PlaylistSongPayloadSchema,
-} = require('../../validator/playlists/schema');
+  PlaylistSongPayloadSchema
+} = require('../../validator/playlists/schema')
 
 const routes = (handler) => [
   {
@@ -11,17 +11,17 @@ const routes = (handler) => [
     options: {
       auth: 'openmusic.jwt',
       validate: {
-        payload: PlaylistPayloadSchema,
-      },
-    },
+        payload: PlaylistPayloadSchema
+      }
+    }
   },
   {
     method: 'GET',
     path: '/playlists',
     handler: handler.getPlaylistsHandler,
     options: {
-      auth: 'openmusic.jwt',
-    },
+      auth: 'openmusic.jwt'
+    }
   },
   {
     method: 'POST',
@@ -30,34 +30,34 @@ const routes = (handler) => [
     options: {
       auth: 'openmusic.jwt',
       validate: {
-        payload: PlaylistSongPayloadSchema,
-      },
-    },
+        payload: PlaylistSongPayloadSchema
+      }
+    }
   },
   {
     method: 'GET',
     path: '/playlists/{playlistId}/songs',
     handler: handler.getPlaylistSongsHandler,
     options: {
-      auth: 'openmusic.jwt',
-    },
+      auth: 'openmusic.jwt'
+    }
   },
   {
     method: 'DELETE',
     path: '/playlists/{playlistId}',
     handler: handler.deletePlaylistHandler,
     options: {
-      auth: 'openmusic.jwt',
-    },
+      auth: 'openmusic.jwt'
+    }
   },
   {
     method: 'DELETE',
     path: '/playlists/{playlistId}/songs',
     handler: handler.deletePlaylistSongHandler,
     options: {
-      auth: 'openmusic.jwt',
-    },
-  },
-];
+      auth: 'openmusic.jwt'
+    }
+  }
+]
 
-module.exports = routes;
+module.exports = routes

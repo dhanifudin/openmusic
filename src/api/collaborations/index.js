@@ -1,5 +1,5 @@
-const CollaborationsHandler = require('./handler');
-const routes = require('./routes');
+const CollaborationsHandler = require('./handler')
+const routes = require('./routes')
 
 module.exports = {
   name: 'collaborations',
@@ -7,8 +7,8 @@ module.exports = {
   register: async (server, { collaborationsService, playlistsService }) => {
     const collaborationsHandler = new CollaborationsHandler(
       collaborationsService,
-      playlistsService,
-    );
-    server.route(routes(collaborationsHandler));
-  },
-};
+      playlistsService
+    )
+    server.route(routes(collaborationsHandler))
+  }
+}
