@@ -10,12 +10,13 @@ class UploadsHandler {
     const { data } = request.payload
     this.validator.validateImageHeaders(data.hapi.headers)
 
-    const fileLocation = await this.service.writeFile(data, data.hapi)
+    const pictureUrl = await this.service.writeFile(data, data.hapi)
 
     const response = h.response({
       status: 'success',
+      message: 'Gambar berhasil diunggah',
       data: {
-        fileLocation
+        pictureUrl
       }
     })
     response.code(201)

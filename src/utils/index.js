@@ -4,6 +4,4 @@ const mapDBToModel = ({ inserted_at, updated_at, ...args }) => ({
   updatedAt: updated_at
 })
 
-module.exports = {
-  mapDBToModel
-}
+module.exports = { mapDBToModel }
