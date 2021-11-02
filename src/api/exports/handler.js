@@ -14,7 +14,7 @@ class ExportsHandler {
       playlistId,
       userId
     )
-    const message = { userId, to: targetEmail, songs }
+    const message = { playlistId, to: targetEmail, songs }
 
     await this.producerService.sendMessage(
       'export:playlist',

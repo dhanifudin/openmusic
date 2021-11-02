@@ -16,10 +16,11 @@ const routes = (handler) => [
   },
   {
     method: 'GET',
-    path: '/upload/{param*}',
+    path: '/{param*}',
     handler: {
       directory: {
-        path: './upload'
+        path: '.',
+        redirectToSlash: true
       }
     }
   }

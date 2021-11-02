@@ -2,7 +2,7 @@ const fs = require('fs')
 
 class LocalService {
   constructor () {
-    this.folder = process.env.UPLOAD_PATH
+    this.folder = './public/uploads'
 
     if (!fs.existsSync(this.folder)) {
       fs.mkdirSync(this.folder, { recursive: true })

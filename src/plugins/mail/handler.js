@@ -9,8 +9,8 @@ class MailHandler {
   async consume () {
     console.log('function consume was called')
     this.consumerService.consume('export:playlist', (message) => {
-      console.log(message)
-      this.mailService.send(message.to, 'OpenMusic Export', JSON.stringify(message.songs))
+      this.mailService
+        .send(message.to, `OpenMusic Export ${message.playlistId}`, JSON.stringify(message.songs))
     })
   }
 }
