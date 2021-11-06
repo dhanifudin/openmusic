@@ -6,6 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node ./src/server.js",
     "serve": "nodemon ./src/server.js",
+    "mail": "NODE_ENV=production node ./src/mail.js",
     "lint": "standard",
     "migrate": "node-pg-migrate",
     "key": "node -e \"console.log(require('crypto').randomBytes(64).toString('hex'));\""

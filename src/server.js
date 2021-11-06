@@ -25,7 +25,6 @@ const CollaborationsService = require('./services/postgres/CollaborationsService
 
 const _exports = require('./api/exports')
 const ProducerService = require('./services/rabbitmq/ProducerService')
-const MailService = require('./services/mail/MailService')
 
 const uploads = require('./api/uploads')
 const LocalService = require('./services/storage/LocalService')
@@ -33,11 +32,7 @@ const UploadsValidator = require('./validator/uploads')
 
 const CacheService = require('./services/redis/CacheService')
 
-const mail = require('./plugins/mail')
-const ConsumerService = require('./services/rabbitmq/ConsumerService')
-
 const init = async () => {
-  const mailService = new MailService()
   const cacheService = new CacheService()
   const songsService = new SongsService()
   const usersService = new UsersService()
@@ -133,13 +128,6 @@ const init = async () => {
       options: {
         service: storageService,
         validator: UploadsValidator
-      }
-    },
-    {
-      plugin: mail,
-      options: {
-        consumerService: ConsumerService,
-        mailService
       }
     }
   ])
