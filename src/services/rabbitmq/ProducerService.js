@@ -8,7 +8,6 @@ const ProducerService = {
       durable: true
     })
 
-    console.log(message)
     await channel.sendToQueue(queue, Buffer.from(message))
 
     setTimeout(() => {
