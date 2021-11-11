@@ -1,0 +1,21 @@
+{
+  "name": "mailer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.8.0",
+    "dotenv": "^10.0.0",
+    "nodemailer": "^6.7.0"
+  },
+  "devDependencies": {
+    "standard": "^16.0.4"
+  }
+}
