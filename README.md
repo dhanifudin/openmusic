@@ -1,9 +1,5 @@
-# OpenMusic
+# OpenMusic API
 
-## Configuration
-
-Copy `.env.example` into `.env` and setup the value.
-
-## Email
-
-I use mailtrap for development purpose, please register at https://mailtrap.io first to get credentials.
+There are two projects:
+- `api` for RESTful API
+- `mailer` application that consume queue and send to email.
