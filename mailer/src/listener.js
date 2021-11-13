@@ -1,6 +1,8 @@
 class Listener {
   constructor (mailSender) {
     this.mailSender = mailSender
+
+    this.listen = this.listen.bind(this)
   }
 
   async listen (message) {
@@ -20,3 +22,5 @@ class Listener {
     }
   }
 }
+
+module.exports = Listener
