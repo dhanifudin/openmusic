@@ -4,7 +4,7 @@ const amqp = require('amqplib')
 const MailSender = require('./MailSender')
 const Listener = require('./listener')
 
-const QUEUE = 'export:playlists'
+const QUEUE = 'export:playlist'
 
 const init = async () => {
   const mailSender = new MailSender()
